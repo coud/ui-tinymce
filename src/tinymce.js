@@ -60,6 +60,18 @@ angular.module('ui.tinymce', [])
                 updateView();
               }
             });
+			
+            // clear editor reference variable on remove
+            ed.on('remove', function(e) {
+                tinyInstance = null;
+            });
+
+            // update model on node change
+            ed.on('nodeChange', function(e) {
+                ed.save();
+                updateView();
+            });
+			
             ed.on('blur', function(e) {
                 elm.blur();
             });
